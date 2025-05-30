@@ -89,8 +89,8 @@ public class Message {
         }
 
         //检查序列化
-        System.out.println(this);
-        System.out.println("序列化后的数据：" + Arrays.toString(buffer.array()));
+        //System.out.println(this);
+        //System.out.println("序列化后的数据：" + Arrays.toString(buffer.array()));
 
         return buffer.array();
     }
