@@ -1,5 +1,6 @@
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 public class Message {
     // 报文类型，规定：1:initialization  2:agreement  3:reverseRequest   4:reverseAnswer
@@ -87,11 +88,17 @@ public class Message {
             buffer.put(data.getBytes(StandardCharsets.UTF_8));
         }
 
+        //检查序列化
+        System.out.println(this);
+        System.out.println("序列化后的数据：" + Arrays.toString(buffer.array()));
+
         return buffer.array();
     }
 
     //反序列化
     public static Message deserialize(byte[] bytes) {
+        String formatted = Arrays.toString(bytes);
+
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
 
         //type:
@@ -106,12 +113,16 @@ public class Message {
             message.setLength(N);
         } else if (type == 3||type==4) {
             int length=buffer.getInt();
-            byte[] dataByte= new byte[]{buffer.get(length)};
+            byte[] dataByte = new byte[length];  //创建正确大小的数组
+            buffer.get(dataByte);  //读取length个字节
 
             message.setLength(length);
             message.setData(new String(dataByte,StandardCharsets.UTF_8));
         }else {
             System.out.println("反序列化出错");
+            //输出原始字符串
+            System.out.println("原始数据：" + Arrays.toString(bytes));
+            System.out.println("按UTF-8解释：" + new String(bytes, StandardCharsets.UTF_8));
         }
         return message;
     }
