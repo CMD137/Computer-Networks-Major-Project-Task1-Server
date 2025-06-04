@@ -97,8 +97,6 @@ public class Message {
 
     //反序列化
     public static Message deserialize(byte[] bytes) {
-        String formatted = Arrays.toString(bytes);
-
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
 
         //type:
