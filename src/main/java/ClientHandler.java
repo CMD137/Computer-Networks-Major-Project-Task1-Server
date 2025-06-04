@@ -29,7 +29,7 @@ public class ClientHandler extends Thread{
             //循环N次对话
             for (int i = 0; i < N; i++) {
                 Message request = receiveMessage(inputStream);
-                System.out.println("收到第" + (i + 1) + "块文本：" + request.getData());
+                System.out.println("收到\t"+socket.getInetAddress()+":"+socket.getPort()+"\t第" + (i + 1) + "块文本：" + request.getData());
 
                 StringBuilder   sb=new StringBuilder(request.getData());
                 String  content=sb.reverse().toString();

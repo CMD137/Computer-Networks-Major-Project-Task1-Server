@@ -7,7 +7,7 @@ public class Server {
         try(ServerSocket serverSocket=new ServerSocket(10086)){
             while (true){
                 Socket socket = serverSocket.accept();
-                System.out.println("客户端连接: " + socket.getInetAddress());
+                System.out.println("客户端连接: " + socket.getInetAddress()+socket.getPort());
                 ClientHandler  clientHandler=new ClientHandler(socket);
                 clientHandler.start();
             }
